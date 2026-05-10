@@ -543,14 +543,16 @@ img {
   font-size: 1.02rem;
 }
 
-/* Dark theme */
-[data-theme="dark"] .hero-copy {
-  color: rgba(255, 255, 255, 0.9);
+/* Light theme */
+.hero-copy {
+  color: rgba(20, 20, 20, 0.85);
 }
 
-/* Light theme */
-[data-theme="light"] .hero-copy {
-  color: rgba(20, 20, 20, 0.85);
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  .hero-copy {
+    color: rgba(255, 255, 255, 0.9);
+  }
 }
 
 .hero-signal-row {
