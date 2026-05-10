@@ -539,9 +539,18 @@ img {
 .hero-copy {
   max-width: 62ch;
   margin: 0;
-  color: rgba(244, 239, 230, 0.85);
   line-height: 1.8;
   font-size: 1.02rem;
+}
+
+/* Dark theme */
+[data-theme="dark"] .hero-copy {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Light theme */
+[data-theme="light"] .hero-copy {
+  color: rgba(20, 20, 20, 0.85);
 }
 
 .hero-signal-row {
