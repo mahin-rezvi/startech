@@ -63,6 +63,7 @@ function MoonIcon() {
   );
 }
 
+export default function ThemeToggle() {
   const [theme, setTheme] = useState<ThemeMode>(() => getBrowserTheme());
 
   useEffect(() => {

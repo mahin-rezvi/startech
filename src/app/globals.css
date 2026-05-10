@@ -38,38 +38,38 @@
 }
 
 html[data-theme="light"] {
-  html[data-theme="sepia"] {
-    color-scheme: light;
-    --bg: #f4ecd8;
-    --bg: #f8fafc;
-    --bg-deep: #f1f5f9;
-    --bg-alt: #e0e7ef;
-    --bg-elevated: rgba(248, 250, 252, 0.98);
-    --bg-soft: rgba(224, 231, 239, 0.82);
-    --panel: rgba(127, 90, 240, 0.08);
-    --panel-strong: rgba(44, 182, 125, 0.08);
-    --card-bg: linear-gradient(180deg, rgba(127, 90, 240, 0.04), rgba(44, 182, 125, 0.04));
-    --card-bg-hover: rgba(127, 90, 240, 0.08);
-    --product-image-bg: #fff;
-    --line: rgba(127, 90, 240, 0.08);
-    --line-strong: rgba(44, 182, 125, 0.12);
-    --text: #232946;
-    --text-strong: #121826;
-    --muted: rgba(35, 41, 70, 0.66);
-    --muted-strong: rgba(35, 41, 70, 0.84);
-    --accent: #7f5af0;
-    --accent-2: #2cb67d;
-    --accent-3: #fbbf24;
-    --brand-red-soft: rgba(244, 63, 94, 0.13);
-    --brand-gold-soft: rgba(251, 191, 36, 0.12);
-    --chip-bg: rgba(127, 90, 240, 0.09);
-    --chip-text: #7f5af0;
-    --chip-ring: rgba(44, 182, 125, 0.18);
-    --grid-line: rgba(127, 90, 240, 0.04);
-    --header-bg: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(224, 231, 239, 0.92));
-    --page-overlay: linear-gradient(180deg, rgba(127, 90, 240, 0.08), rgba(44, 182, 125, 0.04));
-    --shadow: 0 24px 70px rgba(127, 90, 240, 0.08);
-    --shadow-card: 0 20px 48px rgba(44, 182, 125, 0.08);
+  color-scheme: light;
+  --bg: #f8fafc;
+  --bg-deep: #f1f5f9;
+  --bg-alt: #e0e7ef;
+  --bg-elevated: rgba(248, 250, 252, 0.98);
+  --bg-soft: rgba(224, 231, 239, 0.82);
+  --panel: rgba(127, 90, 240, 0.08);
+  --panel-strong: rgba(44, 182, 125, 0.08);
+  --card-bg: linear-gradient(180deg, rgba(127, 90, 240, 0.04), rgba(44, 182, 125, 0.04));
+  --card-bg-hover: rgba(127, 90, 240, 0.08);
+  --product-image-bg: #fff;
+  --line: rgba(127, 90, 240, 0.08);
+  --line-strong: rgba(44, 182, 125, 0.12);
+  --text: #232946;
+  --text-strong: #121826;
+  --muted: rgba(35, 41, 70, 0.66);
+  --muted-strong: rgba(35, 41, 70, 0.84);
+  --accent: #7f5af0;
+  --accent-2: #2cb67d;
+  --accent-3: #fbbf24;
+  --brand-red-soft: rgba(244, 63, 94, 0.13);
+  --brand-gold-soft: rgba(251, 191, 36, 0.12);
+  --chip-bg: rgba(127, 90, 240, 0.09);
+  --chip-text: #7f5af0;
+  --chip-ring: rgba(44, 182, 125, 0.18);
+  --grid-line: rgba(127, 90, 240, 0.04);
+  --header-bg: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(224, 231, 239, 0.92));
+  --page-overlay: linear-gradient(180deg, rgba(127, 90, 240, 0.08), rgba(44, 182, 125, 0.04));
+  --shadow: 0 24px 70px rgba(127, 90, 240, 0.08);
+  --shadow-card: 0 20px 48px rgba(44, 182, 125, 0.08);
+}
+
 html[data-theme="sepia"] {
   color-scheme: light;
   --bg: #f7f4ed;
