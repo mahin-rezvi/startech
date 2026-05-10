@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-type ThemeMode = "light" | "dark";
+type ThemeMode = "light" | "dark" | "sepia";
 
 const storageKey = "startech-atlas-theme";
 
 function resolveTheme(value: string | null): ThemeMode | null {
-  return value === "light" || value === "dark" ? value : null;
+  return value === "light" || value === "dark" || value === "sepia" ? value : null;
 }
 
 function applyTheme(theme: ThemeMode) {
   document.documentElement.dataset.theme = theme;
-  document.documentElement.style.colorScheme = theme;
+  document.documentElement.style.colorScheme = theme === "sepia" ? "light" : theme;
   window.localStorage.setItem(storageKey, theme);
 }
 
@@ -26,6 +26,14 @@ function getBrowserTheme(): ThemeMode {
   const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 
   return stored ?? documentTheme ?? systemTheme;
+}
+function SepiaIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+      <ellipse cx="12" cy="12" rx="7" ry="9" stroke="currentColor" strokeWidth="1.8" fill="#f4ecd8" />
+      <circle cx="12" cy="12" r="3" stroke="#b5853b" strokeWidth="1.2" fill="#c9a063" />
+    </svg>
+  );
 }
 
 function SunIcon() {
@@ -55,26 +63,39 @@ function MoonIcon() {
   );
 }
 
-export function ThemeToggle() {
   const [theme, setTheme] = useState<ThemeMode>(() => getBrowserTheme());
 
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
 
-  const nextTheme = theme === "dark" ? "light" : "dark";
+  // Cycle through themes: dark -> light -> sepia -> dark ...
+  const themeOrder: ThemeMode[] = ["dark", "light", "sepia"];
+  const nextTheme = themeOrder[(themeOrder.indexOf(theme) + 1) % themeOrder.length];
+
+  function getThemeIcon(mode: ThemeMode) {
+    if (mode === "dark") return <MoonIcon />;
+    if (mode === "light") return <SunIcon />;
+    return <SepiaIcon />;
+  }
+
+  function getThemeLabel(mode: ThemeMode) {
+    if (mode === "dark") return "Dark";
+    if (mode === "light") return "Light";
+    return "Sepia";
+  }
 
   return (
     <button
       type="button"
       className="theme-toggle"
-      aria-label={`Switch to ${nextTheme} theme`}
+      aria-label={`Switch to ${getThemeLabel(nextTheme)} theme`}
       onClick={() => {
         setTheme(nextTheme);
       }}
     >
-      {theme === "dark" ? <MoonIcon /> : <SunIcon />}
-      <span>{theme === "dark" ? "Dark" : "Light"}</span>
+      {getThemeIcon(theme)}
+      <span>{getThemeLabel(theme)}</span>
     </button>
   );
 }
