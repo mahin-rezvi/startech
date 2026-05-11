@@ -5,20 +5,22 @@
   "scripts": {
     "data:crawl": "python3 scripts/startech_crawler.py",
     "dev": "next dev",
-    "build": "next build",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && next build",
     "start": "next start",
     "lint": "eslint .",
     "analyze": "ANALYZE=true next build",
     "performance": "next build && next start"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.3.3",
     "@fontsource-variable/bricolage-grotesque": "^5.2.10",
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "cheerio": "^1.2.0",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@types/node": "latest",

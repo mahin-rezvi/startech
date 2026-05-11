@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import ThemeToggle from "@/components/theme-toggle";
+import { AuthHeader } from "./auth-header";
 
 export function SiteHeader() {
   return (
@@ -20,18 +21,19 @@ export function SiteHeader() {
             />
           </span>
           <div className="brand-copy">
-            <strong>Star Tech Atlas</strong>
+            <strong>Baazar</strong>
             <span>Whole-site crawl, search, and product analysis</span>
           </div>
         </Link>
 
         <div className="site-header-actions">
+          <ThemeToggle />
           <nav className="site-nav">
             <Link href="/">Home</Link>
             <Link href="/catalog">Catalog</Link>
             <Link href="/insights">Insights</Link>
           </nav>
-          <ThemeToggle />
+            <AuthHeader />
         </div>
       </div>
     </header>

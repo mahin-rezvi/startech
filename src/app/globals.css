@@ -84,7 +84,7 @@ html[data-theme="sepia"] {
   --product-image-bg: #f7f4ed;
   --line: rgba(251, 191, 36, 0.08);
   --line-strong: rgba(127, 90, 240, 0.12);
-  --text: #7c5e2c;
+  --text: #11100e;
   --text-strong: #4e3a1e;
   --muted: rgba(124, 94, 44, 0.66);
   --muted-strong: rgba(124, 94, 44, 0.84);
@@ -541,19 +541,9 @@ img {
   margin: 0;
   line-height: 1.8;
   font-size: 1.02rem;
+  color: var(--muted);
 }
 
-/* Light theme */
-.hero-copy {
-  color: rgba(20, 20, 20, 0.85);
-}
-
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
-  .hero-copy {
-    color: rgba(255, 255, 255, 0.9);
-  }
-}
 
 .hero-signal-row {
   display: flex;
@@ -587,6 +577,16 @@ img {
   border-radius: 999px;
   background: linear-gradient(135deg, var(--brand-red), var(--accent-3));
   box-shadow: 0 0 18px rgba(235, 28, 36, 0.5);
+}
+
+html[data-theme="light"] .hero-signal-pill {
+  color: rgba(35, 41, 70, 0.92);
+  border-color: rgba(127, 90, 240, 0.18);
+}
+
+html[data-theme="sepia"] .hero-signal-pill {
+  color: rgba(124, 94, 44, 0.92);
+  border-color: rgba(251, 191, 36, 0.18);
 }
 
 .hero-search,

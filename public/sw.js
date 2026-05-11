@@ -58,9 +58,9 @@ self.addEventListener("activate", (event) => {
             cacheName !== RUNTIME_CACHE &&
             cacheName !== IMAGE_CACHE &&
             cacheName !== API_CACHE &&
-            cacheName.startsWith("runtime-") ||
-            cacheName.startsWith("images-") ||
-            cacheName.startsWith("api-")
+            (cacheName.startsWith("runtime-") ||
+              cacheName.startsWith("images-") ||
+              cacheName.startsWith("api-"))
           ) {
             console.log("[ServiceWorker] Deleting old cache:", cacheName);
             return caches.delete(cacheName);
@@ -248,22 +248,26 @@ self.addEventListener("message", (event) => {
     caches.keys().then((cacheNames) => {
       Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)))
         .then(() => {
-          event.ports[0].postMessage({ success: true });
+          if (event.ports[0]) {
+            event.ports[0].postMessage({ success: true });
+          }
         });
     });
   }
 
   if (event.data.type === "GET_CACHE_SIZE") {
     estimateCacheSize().then((size) => {
-      event.ports[0].postMessage({ cacheSize: size });
+      if (event.ports[0]) {
+        event.ports[0].postMessage({ cacheSize: size });
+      }
     });
   }
 });
 
 // Estimate cache size
 async function estimateCacheSize() {
-  if ("storage" in navigator && "estimate" in navigator.storage) {
-    const estimate = await navigator.storage.estimate();
+  if ("storage" in self && "estimate" in self.storage) {
+    const estimate = await self.storage.estimate();
     return estimate.usage || 0;
   }
   return 0;

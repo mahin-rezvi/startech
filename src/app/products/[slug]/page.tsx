@@ -18,7 +18,7 @@ const chipClass =
 const eyebrowClass = "text-xs font-semibold uppercase tracking-[0.16em] text-atlas-gold";
 const mutedTextClass = "text-[color:var(--muted)]";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 1800;
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   if (!product) {
     return {
-      title: "Product Not Found | Star Tech Atlas",
+      title: "Product Not Found | Bazaar",
     };
   }
 
   return {
-    title: `${product.name} | Star Tech Atlas`,
+    title: `${product.name} | Bazaar`,
     description: product.highlights.join(" · "),
   };
 }

@@ -5,6 +5,8 @@ import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
 import { getAnalysis, getFeaturedProducts } from "@/lib/startech";
 
+export const revalidate = 3600;
+
 export default async function HomePage() {
   const analysis = await getAnalysis();
   const featuredProducts = await getFeaturedProducts(8);
@@ -36,28 +38,7 @@ export default async function HomePage() {
             <button type="submit">Search Catalog</button>
           </form>
 
-          <div className="hero-stat-grid">
-            <article className="stat-card">
-              <span>Catalog products</span>
-              <strong>{analysis.catalog_summary.total_products.toLocaleString()}</strong>
-              <small>Captured from root category pagination</small>
-            </article>
-            <article className="stat-card">
-              <span>Root categories</span>
-              <strong>{analysis.catalog_summary.root_category_count}</strong>
-              <small>Top-level commerce sections on the live site</small>
-            </article>
-            <article className="stat-card">
-              <span>Discounted items</span>
-              <strong>{analysis.catalog_summary.discounted_product_count.toLocaleString()}</strong>
-              <small>Products with visible savings on listing pages</small>
-            </article>
-            <article className="stat-card">
-              <span>Sitemap URLs</span>
-              <strong>{analysis.site_summary.sitemap_url_count.toLocaleString()}</strong>
-              <small>Whole-site inventory published by the source</small>
-            </article>
-          </div>
+          
         </div>
 
         <div className="hero-aside">
@@ -98,7 +79,7 @@ export default async function HomePage() {
               <span className="root-chip">{root.name}</span>
               <strong>{root.products.toLocaleString()}</strong>
               <p>{root.pages} paginated listing pages in the source catalog.</p>
-              <Link href={`/catalog?category=${root.slug}`}>Open {root.name}</Link>
+              <Link href={`/catalog?category=${root.slug}`}>{`Open ${root.name}`}</Link>
             </article>
           ))}
         </div>
@@ -126,7 +107,7 @@ export default async function HomePage() {
             Star Tech’s `robots.txt` disallows crawling the query search route, so this project builds its own index from
             paginated category listings. That yields a cleaner UX and a more controllable data model.
           </p>
-          <Link className="ghost-action" href="/insights">
+          <Link href="/insights" className="ghost-action">
             See crawl analysis
           </Link>
         </div>

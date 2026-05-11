@@ -73,6 +73,12 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
 
+  // We run strict type checks explicitly in CI via `npm run typecheck`.
+  // This avoids occasional Next build hangs while preserving type safety.
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   // Webpack optimizations
   webpack: (config, { dev, isServer }) => {
     if (dev || isServer) {

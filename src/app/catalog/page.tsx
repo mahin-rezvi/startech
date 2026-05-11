@@ -47,7 +47,7 @@ function buildQueryString(params: Record<string, string | number | null | undefi
 }
 
 export const metadata: Metadata = {
-  title: "Catalog | Star Tech Atlas",
+  title: "Catalog | Bazaar",
   description: "Search and filter the Star Tech product catalog generated from live category listings.",
 };
 

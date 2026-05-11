@@ -258,7 +258,11 @@ function toAbsoluteUrl(baseUrl: string, candidate: string | null | undefined) {
   }
 
   try {
-    return new URL(candidate, baseUrl).toString();
+    const resolved = new URL(candidate, baseUrl);
+    if (!["http:", "https:"].includes(resolved.protocol)) {
+      return null;
+    }
+    return resolved.toString();
   } catch {
     return null;
   }
@@ -718,7 +722,7 @@ export async function getFeaturedProducts(limit = 8) {
 export const getLiveProductDetail = cache(async (productUrl: string, fallbackImage: string | null = null) => {
   try {
     const response = await fetch(productUrl, {
-      cache: "no-store",
+      next: { revalidate: 1800 },
       headers: STARTECH_HEADERS,
     });
 

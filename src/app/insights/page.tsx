@@ -4,8 +4,10 @@ import { PriceBandChart } from "@/components/price-band-chart";
 import { SectionHeading } from "@/components/section-heading";
 import { getAnalysis } from "@/lib/startech";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-  title: "Insights | Star Tech Atlas",
+  title: "Insights | Bazaar",
   description: "Site-wide analysis and crawl summary for the generated Star Tech dataset.",
 };
 
@@ -53,7 +55,28 @@ export default async function InsightsPage() {
             <strong>{analysis.site_summary.robots_disallow_rules.length}</strong>
             <small>Query-pattern disallow rules identified</small>
           </article>
-        </div>
+        
+            <article className="stat-card">
+              <span>Catalog products</span>
+              <strong>{analysis.catalog_summary.total_products.toLocaleString()}</strong>
+              <small>Captured from root category pagination</small>
+            </article>
+            <article className="stat-card">
+              <span>Root categories</span>
+              <strong>{analysis.catalog_summary.root_category_count}</strong>
+              <small>Top-level commerce sections on the live site</small>
+            </article>
+            <article className="stat-card">
+              <span>Discounted items</span>
+              <strong>{analysis.catalog_summary.discounted_product_count.toLocaleString()}</strong>
+              <small>Products with visible savings on listing pages</small>
+            </article>
+            <article className="stat-card">
+              <span>Sitemap URLs</span>
+              <strong>{analysis.site_summary.sitemap_url_count.toLocaleString()}</strong>
+              <small>Whole-site inventory published by the source</small>
+            </article>
+          </div>
       </section>
 
       <section className="content-surface split-surface">
