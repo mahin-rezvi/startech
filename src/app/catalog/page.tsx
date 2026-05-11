@@ -84,102 +84,98 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         <SectionHeading
           eyebrow="Catalog Search"
           title="Search across the generated Star Tech index"
-          description="This catalog mirrors the current Star Tech listing controls we can support from the crawl snapshot: search, category, price range, availability, show-count, and sort order."
+          description="Use ecommerce-style filters to narrow by category, availability, price range, deals, page size, and sorting behavior."
         />
+      </section>
 
-        <form action="/catalog" className="catalog-toolbar catalog-toolbar-extended">
-          <div className="catalog-toolbar-block catalog-toolbar-search">
-            <label className="catalog-control-label" htmlFor="catalog-q">
-              Search
-            </label>
-            <input defaultValue={q} id="catalog-q" name="q" placeholder="Search by product name, feature, or keyword" />
-          </div>
-
-          <div className="catalog-toolbar-block">
-            <label className="catalog-control-label" htmlFor="catalog-category">
-              Category
-            </label>
-            <select defaultValue={category} id="catalog-category" name="category">
-              <option value="all">All root categories</option>
-              {categories.map((item) => (
-                <option key={item.slug} value={item.slug}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="catalog-toolbar-block">
-            <label className="catalog-control-label" htmlFor="catalog-availability">
-              Availability
-            </label>
-            <select defaultValue={availability} id="catalog-availability" name="availability">
-              <option value="all">All availability</option>
-              <option value="in-stock">In Stock</option>
-              <option value="pre-order">Pre Order</option>
-              <option value="up-coming">Up Coming</option>
-              <option value="out-of-stock">Out Of Stock</option>
-            </select>
-          </div>
-
-          <div className="catalog-toolbar-block">
-            <label className="catalog-control-label" htmlFor="catalog-show">
-              Show
-            </label>
-            <select defaultValue={String(show)} id="catalog-show" name="show">
-              {["20", "24", "48", "75", "90"].map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="catalog-toolbar-block">
-            <label className="catalog-control-label" htmlFor="catalog-sort">
-              Sort By
-            </label>
-            <select defaultValue={sort} id="catalog-sort" name="sort">
-              <option value="featured">Default</option>
-              <option value="price-asc">Price (Low &gt; High)</option>
-              <option value="price-desc">Price (High &gt; Low)</option>
-              <option value="deal">Biggest savings</option>
-              <option value="alpha">Alphabetical</option>
-            </select>
-          </div>
-
-          <div className="catalog-toolbar-block price-range-block">
-            <label className="catalog-control-label">Price Range</label>
-            <div className="catalog-price-pair">
-              <input defaultValue={minPrice ?? ""} inputMode="numeric" name="minPrice" placeholder="Min" />
-              <input defaultValue={maxPrice ?? ""} inputMode="numeric" name="maxPrice" placeholder="Max" />
+      <section className="catalog-layout">
+        <aside className="content-surface compact-surface catalog-filter-sidebar">
+          <form action="/catalog" className="catalog-filter-form">
+            <div className="catalog-toolbar-block catalog-toolbar-search">
+              <label className="catalog-control-label" htmlFor="catalog-q">
+                Search
+              </label>
+              <input defaultValue={q} id="catalog-q" name="q" placeholder="Search by product name, feature, or keyword" />
             </div>
-          </div>
 
-          <label className="catalog-check-row">
-            <input defaultChecked={dealsOnly} name="deals" type="checkbox" value="1" />
-            <span>Deals only</span>
-          </label>
+            <div className="catalog-filter-section">
+              <h3>Category</h3>
+              <select defaultValue={category} id="catalog-category" name="category">
+                <option value="all">All root categories</option>
+                {categories.map((item) => (
+                  <option key={item.slug} value={item.slug}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="catalog-toolbar-actions">
-            <button type="submit">Apply Filters</button>
-            <Link className="ghost-action" href="/catalog">
-              Clear
-            </Link>
-          </div>
-        </form>
+            <div className="catalog-filter-section">
+              <h3>Availability</h3>
+              <select defaultValue={availability} id="catalog-availability" name="availability">
+                <option value="all">All availability</option>
+                <option value="in-stock">In Stock</option>
+                <option value="pre-order">Pre Order</option>
+                <option value="up-coming">Up Coming</option>
+                <option value="out-of-stock">Out Of Stock</option>
+              </select>
+            </div>
 
-        <div className="catalog-meta">
-          <span>
-            {results.total.toLocaleString()} results
-            {q ? ` for "${q}"` : ""}
-          </span>
-          <span>
-            Page {results.page} of {results.totalPages} · Showing {results.items.length} of {results.total.toLocaleString()}
-          </span>
-        </div>
+            <div className="catalog-filter-section">
+              <h3>Price Range</h3>
+              <div className="catalog-price-pair">
+                <input defaultValue={minPrice ?? ""} inputMode="numeric" name="minPrice" placeholder="Min" />
+                <input defaultValue={maxPrice ?? ""} inputMode="numeric" name="maxPrice" placeholder="Max" />
+              </div>
+            </div>
 
-        <div className="catalog-chip-row">
+            <div className="catalog-filter-section">
+              <h3>Sort and Display</h3>
+              <div className="catalog-filter-duo">
+                <select defaultValue={sort} id="catalog-sort" name="sort">
+                  <option value="featured">Default</option>
+                  <option value="price-asc">Price (Low &gt; High)</option>
+                  <option value="price-desc">Price (High &gt; Low)</option>
+                  <option value="deal">Biggest savings</option>
+                  <option value="alpha">Alphabetical</option>
+                </select>
+                <select defaultValue={String(show)} id="catalog-show" name="show">
+                  {["20", "24", "48", "75", "90"].map((value) => (
+                    <option key={value} value={value}>
+                      Show {value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <label className="catalog-check-row">
+              <input defaultChecked={dealsOnly} name="deals" type="checkbox" value="1" />
+              <span>Deals only</span>
+            </label>
+
+            <div className="catalog-toolbar-actions">
+              <button type="submit">Apply Filters</button>
+              <Link className="ghost-action" href="/catalog">
+                Clear
+              </Link>
+            </div>
+          </form>
+        </aside>
+
+        <div className="catalog-main-stack">
+          <section className="content-surface compact-surface">
+            <div className="catalog-meta">
+              <span>
+                {results.total.toLocaleString()} results
+                {q ? ` for "${q}"` : ""}
+              </span>
+              <span>
+                Page {results.page} of {results.totalPages} · Showing {results.items.length} of {results.total.toLocaleString()}
+              </span>
+            </div>
+
+            <div className="catalog-chip-row">
           <Link className={category === "all" ? "tone-chip active" : "tone-chip"} href="/catalog">
             All
           </Link>
@@ -262,28 +258,28 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             </Link>
           ))}
         </div>
-      </section>
+          </section>
 
-      {results.items.length > 0 ? (
-        <section className="catalog-results-grid">
-          {results.items.map((product) => (
-            <ProductCard key={product.slug} product={product} />
-          ))}
-        </section>
-      ) : (
-        <section className="content-surface">
-          <div className="info-card">
-            <span className="section-eyebrow">No Matches</span>
-            <h2>No products matched the current query.</h2>
-            <p>Try a broader keyword, switch root categories, or reset to the full catalog.</p>
-            <Link className="ghost-action" href="/catalog">
-              Reset search
-            </Link>
-          </div>
-        </section>
-      )}
+          {results.items.length > 0 ? (
+            <section className="catalog-results-grid">
+              {results.items.map((product) => (
+                <ProductCard key={product.slug} product={product} />
+              ))}
+            </section>
+          ) : (
+            <section className="content-surface">
+              <div className="info-card">
+                <span className="section-eyebrow">No Matches</span>
+                <h2>No products matched the current query.</h2>
+                <p>Try a broader keyword, switch root categories, or reset to the full catalog.</p>
+                <Link className="ghost-action" href="/catalog">
+                  Reset search
+                </Link>
+              </div>
+            </section>
+          )}
 
-      <nav className="pagination-row" aria-label="Catalog pagination">
+          <nav className="pagination-row" aria-label="Catalog pagination">
         <Link
           className={results.page <= 1 ? "page-link disabled" : "page-link"}
           href={`/catalog${buildQueryString({
@@ -344,33 +340,35 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         >
           Next
         </Link>
-      </nav>
+          </nav>
 
-      {results.page < results.totalPages ? (
-        <section className="content-surface compact-surface see-more-surface">
-          <div className="info-card accent">
-            <span className="section-eyebrow">See More</span>
-            <h2>Continue browsing the catalog</h2>
-            <p>Move to the next result page while keeping the current filters, sorting, and show-count intact.</p>
-            <Link
-              className="primary-action"
-              href={`/catalog${buildQueryString({
-                q,
-                category,
-                sort,
-                availability,
-                show,
-                minPrice,
-                maxPrice,
-                deals: dealsOnly ? 1 : undefined,
-                page: results.page + 1,
-              })}`}
-            >
-              See More Products
-            </Link>
-          </div>
-        </section>
-      ) : null}
+          {results.page < results.totalPages ? (
+            <section className="content-surface compact-surface see-more-surface">
+              <div className="info-card accent">
+                <span className="section-eyebrow">See More</span>
+                <h2>Continue browsing the catalog</h2>
+                <p>Move to the next result page while keeping the current filters, sorting, and show-count intact.</p>
+                <Link
+                  className="primary-action"
+                  href={`/catalog${buildQueryString({
+                    q,
+                    category,
+                    sort,
+                    availability,
+                    show,
+                    minPrice,
+                    maxPrice,
+                    deals: dealsOnly ? 1 : undefined,
+                    page: results.page + 1,
+                  })}`}
+                >
+                  See More Products
+                </Link>
+              </div>
+            </section>
+          ) : null}
+        </div>
+      </section>
     </main>
   );
 }
